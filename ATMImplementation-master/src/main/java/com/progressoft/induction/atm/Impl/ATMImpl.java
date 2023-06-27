@@ -8,13 +8,20 @@ import com.progressoft.induction.atm.exceptions.NotEnoughMoneyInATMException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class ATMImpl implements ATM {
-    private final BankingSystemImpl bankingSystem=new BankingSystemImpl();
+    private final BankingSystemImpl bankingSystem = new BankingSystemImpl();
+
     @Override
     public List<Banknote> withdraw(String accountNumber, BigDecimal amount) {
+        // Validate the account number
+        if (!isValidAccountNumber(accountNumber)) {
+            throw new AccountNotFoundException("Invalid account number");
+        }
+
         BigDecimal accountBalance = bankingSystem.getAccountBalance(accountNumber);
         validateAccountBalance(accountBalance, amount);
         validateATMBalance(amount);
@@ -25,8 +32,14 @@ public class ATMImpl implements ATM {
 
         return banknotes;
     }
+
     @Override
     public BigDecimal checkBalance(String accountNumber) {
+        // Validate the account number
+        if (!isValidAccountNumber(accountNumber)) {
+            throw new AccountNotFoundException("Invalid account number");
+        }
+
         return bankingSystem.getAccountBalance(accountNumber);
     }
 
@@ -35,14 +48,14 @@ public class ATMImpl implements ATM {
             throw new AccountNotFoundException("Account not found");
         }
 
-        if(accountBalance.compareTo(amount) < 0){
+        if (accountBalance.compareTo(amount) < 0) {
             throw new InsufficientFundsException("Insufficient funds in your account");
         }
     }
 
-    private void validateATMBalance(BigDecimal amount){
+    private void validateATMBalance(BigDecimal amount) {
         BigDecimal atmBalance = bankingSystem.sumOfMoneyInAtm();
-        if (atmBalance.compareTo(amount) < 0){
+        if (atmBalance.compareTo(amount) < 0) {
             throw new NotEnoughMoneyInATMException("Not enough money in ATM");
         }
     }
@@ -79,5 +92,11 @@ public class ATMImpl implements ATM {
         for (Banknote banknote : banknotes) {
             bankingSystem.decreaseBanknoteCount(banknote);
         }
+    }
+
+    // Custom account number validation method
+    private boolean isValidAccountNumber(String accountNumber) {
+        List<String> validAccountNumbers = Arrays.asList("123456789", "111111111", "222222222", "333333333", "444444444");
+        return validAccountNumbers.contains(accountNumber);
     }
 }

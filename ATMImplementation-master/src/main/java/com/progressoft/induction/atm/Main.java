@@ -18,8 +18,8 @@ public class Main {
 
         try {
             // Withdraw money from an account
-            String accountNumber = "123456789";
-            BigDecimal amount = new BigDecimal("40.0");
+            String accountNumber = "111111111";
+            BigDecimal amount = new BigDecimal("2000.0");
             List<Banknote> banknotes = atm.withdraw(accountNumber, amount);
             System.out.println("Withdrawn banknotes: " + banknotes);
 

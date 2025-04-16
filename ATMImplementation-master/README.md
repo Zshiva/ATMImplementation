@@ -42,37 +42,3 @@ The following shows the initial money inside the ATM
 | Ten JOD        | 100    |
 | Five JOD       | 100    |
 
-
-### Project Structure
-This project is a maven project, you can start working on the project by importing it to your favorite IDE. The project 
-contains some JUnit tests to help you verify your work. You can run these tests using the IDE or from the command line 
-using the command `mvn clean test`.
-
- > Changing the Unit tests code is not allowed.
-
- > Changing the interfaces `ATM` and `BankingSystem` is not allowed.
-
-### Required Delivery
-You should deliver a working application that complies with the description above and make all the tests in the class 
-`com.progressoft.induction.atm.ATMTest` pass successfully **without modifying the tests themselves**, the only 
-thing you are allowed to modify in the test class is initializing the `atm` object with your implementation class inside 
-the `setUp()` method. 
-
-No user interface is required. 
-
-
-### Evaluation Criteria
-In order of importance 
-
-* compiled code and all tests passing
-* code quality and simplicity, you should follow Java coding conventions and try to find the simplest solution.
-* proper user input validation
-* code duplication, you should minimize duplication to the minimum
-
-
-### Optional Delivery
-A survey showed that ATM users prefer to receive banknotes with different values when withdrawing money, e.g. when 
-withdrawing a 100 JODs, it is preferred to receive a mix of banknotes instead of two 50 JOD banknotes.
-
-As an optional task, make sure the everytime a user withdraws from the ATM, it returns a mix of banknotes as diverse as 
-possible.
